@@ -9,10 +9,28 @@
   font-family: "Roboto", sans-serif;
 }
 
+.btn-primary {
+  background-color: #6271DD;
+  --bs-btn-color: #fff;
+  --bs-btn-bg: $primary-color;
+  --bs-btn-border-color: $primary-color;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #7b89ed;
+  --bs-btn-hover-border-color: #7b89ed ;
+  --bs-btn-focus-shadow-rgb: $primary-color;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: $primary-color;
+  --bs-btn-active-border-color: $primary-color;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #8691ff;
+  --bs-btn-disabled-border-color: #8691ff;
+}
+
 body {
   display: flex;
   min-height: 100vh;
-  background-color: #F5F5F5;
+  background-color: #F7FAFF;
 }
 
 #logo {
@@ -26,7 +44,7 @@ body {
 }
 #logo h5 {
   font-family: "Kodchasan", sans-serif;
-  font-size: 1rem !important;
+  font-size: 1.5rem !important;
   font-weight: 700 !important;
 }
 
@@ -47,6 +65,7 @@ nav ul {
 nav ul li {
   padding: 0.2rem 0.5rem;
   border-radius: 0.8rem;
+  cursor: pointer;
 }
 nav ul li a img {
   transform: scale(0.8);
@@ -62,8 +81,13 @@ nav ul li.active {
 nav ul li.active * {
   color: #6271DD;
 }
+nav ul li:hover {
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
 nav #profile {
   margin-top: auto;
+  cursor: pointer;
   color: #6271DD;
   font-weight: 500;
   background-color: white;
@@ -72,6 +96,89 @@ nav #profile {
 }
 nav #profile img {
   transform: scale(0.8);
+}
+
+main {
+  padding: 5rem 1rem 1rem 1rem;
+  width: 100%;
+}
+main h2 {
+  font-weight: 500;
+}
+main .inputs {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+main .inputs button {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+main .inputs .range input, main .inputs select {
+  width: 100%;
+}
+main .inputs .range {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  gap: 0.5rem;
+}
+main input, main select {
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  border-radius: 0.6rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  border: none;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0.8rem;
+}
+.card img {
+  height: 260px;
+}
+.card * {
+  margin: 0;
+}
+.card .tags {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+.card .tags * {
+  padding: 0.2rem 0.4rem;
+  background-color: #8A8B92;
+  color: white;
+  border-radius: 0.3rem;
+  font-size: 0.7rem;
+}
+.card .adresse {
+  color: #8A8B92;
+}
+.card .card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.card .price {
+  color: #6271DD;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.cards {
+  padding: 1.5rem 0;
+  justify-content: space-between;
+  row-gap: 1rem;
+}
+.cards .card-container {
+  padding: 0 0.5rem;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -138,6 +138,11 @@ main {
       width: 50%;
       gap: .5rem;
     }
+    form {
+      display: flex;
+      gap: 1rem;
+      width: 100%;
+    }
   }
   padding: 5rem 1rem 1rem 1rem;
   width: 100%;

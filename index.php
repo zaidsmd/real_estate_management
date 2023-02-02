@@ -34,43 +34,49 @@ include "dbconfig.php"
     <h2 class="title">Listings</h2>
     <div class="inputs">
         <button class="btn btn-primary" id="add"><span>Add</span><i class="fa-solid fa-plus"></i></button>
-        <select name="type" id="type">
-            <option value="0">Filter by type</option>
-            <option value="S">For Sale</option>
-            <option value="R">For Rent</option>
-        </select>
-        <div class="range">
-            <label for="range_min">Min:</label>
-            <input type="number" name="min" id="range_min">
-        </div>
-        <div class="range">
-            <label for="range_max">Max:</label>
-            <input type="number" name="max" id="range_max">
-        </div>
-        <button class="btn btn-primary" id="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <form action="index.php" method="get">
+            <select name="type" id="type">
+                <option value="0">Filter by type</option>
+                <option value="For Sale">For Sale</option>
+                <option value="For Rent">For Rent</option>
+            </select>
+            <div class="range">
+                <label for="range_min">Min:</label>
+                <input type="number" name="min" id="range_min" value="0">
+            </div>
+            <div class="range">
+                <label for="range_max">Max:</label>
+                <input type="number" name="max" id="range_max" value="3000000000">
+            </div>
+            <input type="text" name="check" style="display: none">
+            <button type="submit" class="btn btn-primary" id="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
     </div>
     <div class="cards d-flex flex-wrap">
         <?php
-        $statement =$conn->prepare("SELECT * FROM `annonces`");
-        $statement->execute();
-        $result = $statement->fetchAll();
-        foreach ($result as $row){
-            echo '
-            <div class="card-container col-3">
-           <div class="card"data-id="'.$row["annonce_id"].'"onclick=\'show('.json_encode($row).')\' data-bs-toggle="modal" data-bs-target="#modal">
-               <img src="'.$row["annonce_image"].'" class="card-img-top" alt="'.$row["annonce_title"].'">
-               <div class="card-body">
-                   <h4 class="card-title">'.$row["annonce_title"].'</h4>
-                   <div class="tags">
-                       <div class="tag">'.$row["annonce_type"].'</div>
-                       <div class="tag">'.$row["annonce_area"].'m²</div>
-                       <div class="tag">'.$row["annonce_date"].'</div>
-                   </div>
-                   <div class="adresse">'.$row["annonce_adresse"].'</div>
-                   <p class="price" >$'.number_format($row["annonce_price"],2,'.',',').'</p>
-               </div>
-           </div>
-       </div>';
+        if (isset($_GET["check"])){
+            if (isset($_GET["max"]) && isset($_GET["min"]) && $_GET["type"]!= 0 ){
+                $max = $_GET["max"];
+                $min = $_GET["min"];
+                $type = $_GET["type"];
+                $statement =$conn->prepare("SELECT * FROM `annonces` WHERE annonce_type = '$type' AND annonce_price BETWEEN $min AND $max");
+                $statement->execute();
+                $result = $statement->fetchAll();
+                createCard($result);
+            }else {
+                $max = $_GET["max"];
+                $min = $_GET["min"];
+                $type = $_GET["type"];
+                $statement =$conn->prepare("SELECT * FROM `annonces` WHERE annonce_price BETWEEN $min AND $max");
+                $statement->execute();
+                $result = $statement->fetchAll();
+                createCard($result);
+            }
+        }else {
+            $statement =$conn->prepare("SELECT * FROM `annonces`");
+            $statement->execute();
+            $result = $statement->fetchAll();
+            createCard($result);
         }
         ?>
     </div>
@@ -119,6 +125,36 @@ include "dbconfig.php"
         document.querySelector('#modal .adresse').innerHTML= data["annonce_adresse"];
         document.querySelector('#modal .modal-desc').innerHTML= data["annonce_description"];
     }
+    <?php
+        if (isset($_GET["check"])){
+            echo "
+            document.querySelector('#range_min').value = ".$_GET["min"].";
+            document.querySelector('#range_max').value = ".$_GET["max"].";
+            document.querySelector('option[value=\"".$_GET["type"]."\"]').setAttribute('selected','');
+            ";
+        }
+    ?>
 </script>
 </body>
 </html>
+<?php
+function createCard($data){
+    foreach ($data as $row){
+        echo '
+            <div class="card-container col-3">
+           <div class="card"data-id="'.$row["annonce_id"].'"onclick=\'show('.json_encode($row).')\' data-bs-toggle="modal" data-bs-target="#modal">
+               <img src="'.$row["annonce_image"].'" class="card-img-top" alt="'.$row["annonce_title"].'">
+               <div class="card-body">
+                   <h4 class="card-title">'.$row["annonce_title"].'</h4>
+                   <div class="tags">
+                       <div class="tag">'.$row["annonce_type"].'</div>
+                       <div class="tag">'.$row["annonce_area"].'m²</div>
+                       <div class="tag">'.$row["annonce_date"].'</div>
+                   </div>
+                   <div class="adresse">'.$row["annonce_adresse"].'</div>
+                   <p class="price" >$'.number_format($row["annonce_price"],2,'.',',').'</p>
+               </div>
+           </div>
+       </div>';
+    }
+}

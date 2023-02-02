@@ -130,6 +130,11 @@ main .inputs .range {
   width: 50%;
   gap: 0.5rem;
 }
+main .inputs form {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
 main input, main select {
   border: none;
   outline: none;

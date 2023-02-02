@@ -33,7 +33,7 @@ include "dbconfig.php"
 <main>
     <h2 class="title">Listings</h2>
     <div class="inputs">
-        <button class="btn btn-primary" id="add"><span>Add</span><i class="fa-solid fa-plus"></i></button>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-modal" id="add"><span>Add</span><i class="fa-solid fa-plus"></i></button>
         <form action="index.php" method="get">
             <select name="type" id="type">
                 <option value="0">Filter by type</option>
@@ -113,6 +113,35 @@ include "dbconfig.php"
                 </div>
             </div>
         </div>
+    <div id="add-modal" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <button type="button" id="close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body">
+                    <h4 class="title">647m² house with garage</h4>
+                    <div class="tags">
+                        <div class="tag">For Sale</div>
+                        <div class="tag">647m²</div>
+                        <div class="tag">2023-02-31</div>
+                    </div>
+                    <div class="adresse">2441 S Fraser Street, Aurora</div>
+                    <p class="modal-desc">
+                        Located on a sunny, east-facing lot in Aurora’s Chaddsford neighborhood, this contemporary home
+                        balances modern updates and timeless charm. Tons of natural light, a fresh neutral palette and
+                        beautiful hardwood floors seamlessly connect the main living spaces. The gas fireplace acts as
+                        the focal point to the inviting living room and the formal dining room is ideal for
+                        entertaining. The updated galley kitchen includes butcherblock counters, new cabinetry and easy
+                        access to the backyard through the large sliding glass door.
+                    </p>
+                    <p class="price">$475,000.00</p>
+                    <div class="buttons">
+                        <button class="btn btn-primary " type="button" id="delete">Delete</button>
+                        <button class="btn btn-primary" id="edit" >Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script >

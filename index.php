@@ -57,7 +57,7 @@ include "dbconfig.php"
         foreach ($result as $row){
             echo '
             <div class="card-container col-3">
-           <div class="card">
+           <div class="card"data-id="'.$row["annonce_id"].'"onclick=\'show('.json_encode($row).')\'>
                <img src="'.$row["annonce_image"].'" class="card-img-top" alt="'.$row["annonce_title"].'">
                <div class="card-body">
                    <h4 class="card-title">'.$row["annonce_title"].'</h4>
@@ -74,12 +74,55 @@ include "dbconfig.php"
         }
         ?>
     </div>
+    <div class="centerPoint">
+        <dialog id="modal">
+            <div class="modal-cnt">
+                <div class="modal-img">
+                    <img src="https://photos.zillowstatic.com/fp/6fba0ee9ec00fa7f5bbb00659b714e31-cc_ft_1536.webp"
+                         alt="">
+                </div>
+                <div class="modal-body">
+                    <h4 class="title">647m² house with garage</h4>
+                    <div class="tags">
+                        <div class="tag">For Sale</div>
+                        <div class="tag">647m²</div>
+                        <div class="tag">2023-02-31</div>
+                    </div>
+                    <div class="adresse">2441 S Fraser Street, Aurora</div>
+                    <p class="modal-desc">
+                        Located on a sunny, east-facing lot in Aurora’s Chaddsford neighborhood, this contemporary home
+                        balances modern updates and timeless charm. Tons of natural light, a fresh neutral palette and
+                        beautiful hardwood floors seamlessly connect the main living spaces. The gas fireplace acts as
+                        the focal point to the inviting living room and the formal dining room is ideal for
+                        entertaining. The updated galley kitchen includes butcherblock counters, new cabinetry and easy
+                        access to the backyard through the large sliding glass door.
+                    </p>
+                    <p class="price">$475,000.00</p>
+                    <div class="buttons">
+                        <button class="btn btn-primary " type="button" id="delete">Delete</button>
+                        <button class="btn btn-primary" id="edit" >Edit</button>
+                    </div>
+                    <button id="close"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+        </dialog>
+    </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-<script>
-    <?php
-        echo "console.log(".json_encode($result).")";
-    ?>;
+<script >
+    function show(data) {
+        document.querySelector('#modal').showModal()
+        document.querySelector('.modal-img img').src= data["annonce_image"];
+        document.querySelector('#modal .title').innerHTML= data["annonce_title"];
+        document.querySelector('#modal .tag:first-child').innerHTML= data["annonce_type"];
+        document.querySelector('#modal .tag:last-child').innerHTML= data["annonce_date"];
+        document.querySelector('#modal .tag:nth-child(2)').innerHTML= data["annonce_date"];
+        document.querySelector('#modal .adresse').innerHTML= data["annonce_adresse"];
+        document.querySelector('#modal .modal-desc').innerHTML= data["annonce_description"];
+    }
+    document.querySelector('#close').addEventListener('click',e=>{
+        document.querySelector('#modal').close();
+    })
 </script>
 </body>
 </html>

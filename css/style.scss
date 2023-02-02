@@ -186,12 +186,6 @@ main {
   }
 }
 #modal {
-  border: none;
-  border-radius: .8rem;
-  max-width: 800px;
-  position: relative;
-  margin-top: 25%;
-  margin-left: 25%;
   .modal-img {
     width: 50%;
     overflow: clip;
@@ -200,10 +194,13 @@ main {
       transform: translateX(-25%);
     }
   }
-  .modal-cnt {
+  .modal-content {
     width: 100%;
     display: flex;
     flex-direction: row;
+    border-radius: .8rem;
+    overflow: clip;
+    border: none;
   }
   .modal-body {
     width: 50%;
@@ -238,6 +235,12 @@ main {
     outline: none;
     color: $grey  ;
     font-size: 1.5rem;
+    z-index: 99;
+    transform: scale(.8);
+  }
+  .modal-dialog {
+    position: relative;
+    max-width: 800px;
   }
 }
 .tags {
@@ -264,9 +267,4 @@ main {
   color: $primary-color;
   font-size: 1.5rem;
   font-weight: 700;
-}
-.centerPoint {
-  position: absolute;
-  top: 50%;
-  right: 50%;
 }

@@ -175,14 +175,6 @@ main input, main select {
   overflow: hidden;
 }
 
-#modal {
-  border: none;
-  border-radius: 0.8rem;
-  max-width: 800px;
-  position: relative;
-  margin-top: 25%;
-  margin-left: 25%;
-}
 #modal .modal-img {
   width: 50%;
   overflow: clip;
@@ -191,10 +183,13 @@ main input, main select {
   max-height: 600px;
   transform: translateX(-25%);
 }
-#modal .modal-cnt {
+#modal .modal-content {
   width: 100%;
   display: flex;
   flex-direction: row;
+  border-radius: 0.8rem;
+  overflow: clip;
+  border: none;
 }
 #modal .modal-body {
   width: 50%;
@@ -229,6 +224,12 @@ main input, main select {
   outline: none;
   color: #8A8B92;
   font-size: 1.5rem;
+  z-index: 99;
+  transform: scale(0.8);
+}
+#modal .modal-dialog {
+  position: relative;
+  max-width: 800px;
 }
 
 .tags {
@@ -257,12 +258,6 @@ main input, main select {
   color: #6271DD;
   font-size: 1.5rem;
   font-weight: 700;
-}
-
-.centerPoint {
-  position: absolute;
-  top: 50%;
-  right: 50%;
 }
 
 /*# sourceMappingURL=style.css.map */

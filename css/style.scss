@@ -189,7 +189,7 @@ main {
     overflow: hidden;
   }
 }
-#modal {
+#modal ,#del-modal{
   .modal-img {
     width: 50%;
     overflow: clip;
@@ -222,13 +222,6 @@ main {
       width: 100%;
       padding: .5rem 0;
     }
-    #delete {
-      background-color: #E74040;
-      border: #E74040;
-      &:hover {
-        background-color: #df6c6c;
-      }
-    }
   }
   #close {
     position: absolute;
@@ -245,6 +238,13 @@ main {
   .modal-dialog {
     position: relative;
     max-width: 800px;
+  }
+  #delete ,#Delete{
+    background-color: #E74040;
+    border: #E74040;
+    &:hover {
+      background-color: #df6c6c;
+    }
   }
 }
 .tags {

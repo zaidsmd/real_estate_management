@@ -161,29 +161,48 @@ include "dbconfig.php"
                     <button type="button" id="close" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     <div class="modal-body">
-                        <h4 class="title">647m² house with garage</h4>
-                        <div class="tags">
-                            <div class="tag">For Sale</div>
-                            <div class="tag">647m²</div>
-                            <div class="tag">2023-02-31</div>
-                        </div>
-                        <div class="adresse">2441 S Fraser Street, Aurora</div>
-                        <p class="modal-desc">
-                            Located on a sunny, east-facing lot in Aurora’s Chaddsford neighborhood, this contemporary
-                            home
-                            balances modern updates and timeless charm. Tons of natural light, a fresh neutral palette
-                            and
-                            beautiful hardwood floors seamlessly connect the main living spaces. The gas fireplace acts
-                            as
-                            the focal point to the inviting living room and the formal dining room is ideal for
-                            entertaining. The updated galley kitchen includes butcherblock counters, new cabinetry and
-                            easy
-                            access to the backyard through the large sliding glass door.
-                        </p>
-                        <p class="price">$475,000.00</p>
-                        <div class="buttons">
-                            <button class="btn btn-primary " type="button" id="delete">Delete</button>
-                            <button class="btn btn-primary" id="edit">Edit</button>
+                        <h4 class="title">Add new annonce</h4>
+                        <p>Please fill every input all inputs are required.</p>
+                        <form action="add.php" method="post" enctype="multipart/form-data">
+                            <div class="input-group">
+                                <div class="input">
+                                    <label for="title_add">Annonce title</label>
+                                    <input type="text" id="title_add" maxlength="40" name="title">
+                                </div>
+                                <div class="input">
+                                    <label for="adresse_add">Annonce adresse</label>
+                                    <input type="text" maxlength="50" id="adresse_add" name="adresse">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <div class="input">
+                                    <label for="area_add">Annonce area(m²)</label>
+                                    <input type="text" maxlength="11" id="area_add" name="area">
+                                </div>
+                                <div class="input">
+                                    <label for="price_add">Annonce price</label>
+                                    <input type="text" maxlength="11" id="price_add" name="price">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <div class="input">
+                                    <label for="type_add">Annonce type</label>
+                                    <select name="type" id="type_add">
+                                        <option value="For Sale">For Sale</option>
+                                        <option value="For Rent">For Rent</option>
+                                    </select>
+                                </div>
+                                <div class="input">
+                                    <label for="image_add">Annonce image (jpg-png-jpeg)</label>
+                                    <input type="file" id="image_add" name="image">
+                                </div>
+                            </div>
+                            <div class="input">
+                                <label for="description_add">Annonce description</label>
+                                <textarea name="description"  maxlength="800" id="description_add" rows="5"></textarea>
+                            </div>
+                            <input class="btn btn-primary" type="submit" value="Add">
+                        </form>
                         </div>
                     </div>
                 </div>
@@ -195,13 +214,18 @@ include "dbconfig.php"
             crossorigin="anonymous"></script>
     <script>
         function show(data) {
-            document.querySelector('.modal-img img').src = data["annonce_image"];
+            document.querySelector('.modal-img img').src = "pictures/"+data["annonce_image"];
             document.querySelector('#modal .title').innerHTML = data["annonce_title"];
             document.querySelector('#modal .tag:first-child').innerHTML = data["annonce_type"];
             document.querySelector('#modal .tag:last-child').innerHTML = data["annonce_date"];
-            document.querySelector('#modal .tag:nth-child(2)').innerHTML = data["annonce_date"];
+            document.querySelector('#modal .tag:nth-child(2)').innerHTML = data["annonce_area"]+"m²";
             document.querySelector('#modal .adresse').innerHTML = data["annonce_adresse"];
             document.querySelector('#modal .modal-desc').innerHTML = data["annonce_description"];
+            if (data["annonce_type"] == "For Rent") {
+                document.querySelector('#modal .price').innerHTML = (new Intl.NumberFormat('en-US',{style:'currency', currency: 'USD'}).format(data["annonce_price"]))+"/month";
+            }else {
+                document.querySelector('#modal .price').innerHTML = (new Intl.NumberFormat('en-US',{style:'currency', currency: 'USD'}).format(data["annonce_price"]));
+            }
             document.querySelector('#modal #delete').dataset.id = data["annonce_id"];
             document.querySelector('#modal #delete').setAttribute('onclick','deleteModal(this.dataset.id)');
         }
@@ -227,7 +251,7 @@ function createCard($data)
         echo '
             <div class="card-container col-3">
            <div class="card"data-id="' . $row["annonce_id"] . '"onclick=\'show(' . json_encode($row) . ')\' data-bs-toggle="modal" data-bs-target="#modal">
-               <img src="' . $row["annonce_image"] . '" class="card-img-top" alt="' . $row["annonce_title"] . '">
+               <img src="pictures/' . $row["annonce_image"] . '" class="card-img-top" alt="' . $row["annonce_title"] . '">
                <div class="card-body">
                    <h4 class="card-title">' . $row["annonce_title"] . '</h4>
                    <div class="tags">

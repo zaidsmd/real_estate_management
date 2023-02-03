@@ -189,7 +189,7 @@ main {
     overflow: hidden;
   }
 }
-#modal ,#del-modal{
+#modal ,#del-modal, #add-modal{
   .modal-img {
     width: 50%;
     overflow: clip;
@@ -244,6 +244,39 @@ main {
     border: #E74040;
     &:hover {
       background-color: #df6c6c;
+    }
+  }
+  /////add-modal
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  input ,select{
+    border: 1px solid $primary-color;
+    height: 100%;
+  }
+  label:after {
+    content: '*';
+    color: #E74040;
+  }
+  .input-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .input {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    &:has(textarea){
+      width: 100%;
+      textarea {
+        resize: none;
+        border: 1px solid $primary-color;
+        outline: none;
+        padding: .5rem;
+      }
     }
   }
 }

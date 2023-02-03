@@ -419,4 +419,15 @@ main input, main select {
   width: 90%;
 }
 
+.notFound {
+  text-align: center;
+  color: #8A8B92;
+  min-height: 400px;
+  justify-content: center;
+  align-items: center;
+}
+.notFound i {
+  font-size: 70px !important;
+}
+
 /*# sourceMappingURL=style.css.map */

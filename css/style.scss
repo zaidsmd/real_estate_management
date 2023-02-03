@@ -397,3 +397,13 @@ main {
 #modal .modal-dialog {
   width: 90%;
 }
+.notFound {
+  text-align: center;
+  color: $grey;
+  min-height: 400px;
+  justify-content: center;
+  align-items: center;
+  i {
+    font-size: 70px !important;
+  }
+}

@@ -17,10 +17,10 @@ include "dbconfig.php"
     </head>
     <body>
     <nav>
-        <div id="logo">
+        <a href="index.php" id="logo">
             <img src="img/homehashtag.png" alt="">
             <h5>House Miner</h5>
-        </div>
+        </a>
         <ul>
             <li><a><img src="img/home.png" alt="icon"> <span>Home</span></a></li>
             <li><a><img src="img/boards.png" alt="icon"> <span>Boards</span></a></li>

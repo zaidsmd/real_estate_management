@@ -34,6 +34,7 @@ body {
 }
 
 #logo {
+  text-decoration-line: none !important;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,6 +47,8 @@ body {
   font-family: "Kodchasan", sans-serif;
   font-size: 1.5rem !important;
   font-weight: 700 !important;
+  text-decoration-line: none !important;
+  color: #6271DD;
 }
 
 nav {

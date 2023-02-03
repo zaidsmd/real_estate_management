@@ -41,16 +41,19 @@ body {
 }
 
 #logo {
+  text-decoration-line: none !important;
+
   img {
     transform: scale(.8);
   }
-
   h5 {
     font: {
       family: "Kodchasan", sans-serif;
       size: 1.5rem !important;
       weight: 700 !important;
     };
+    text-decoration-line: none !important;
+    color: $primary-color;
   }
 
   display: flex;

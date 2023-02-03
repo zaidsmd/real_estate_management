@@ -38,11 +38,13 @@ body {
   display: flex;
   min-height: 100vh;
   background-color: $secondary-color;
+  @media screen and (max-width: 544px) {
+    flex-direction: column-reverse;
+  }
 }
 
 #logo {
   text-decoration-line: none !important;
-
   img {
     transform: scale(.8);
   }
@@ -54,12 +56,16 @@ body {
     };
     text-decoration-line: none !important;
     color: $primary-color;
+    text-align: center;
   }
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 544px) {
+    display: none;
+  }
 }
 
 nav {
@@ -84,10 +90,16 @@ nav {
       a {
         img  {
           transform: scale(.8);
+          @media screen and (max-width: 544px) {
+            transform: scale(1);
+          }
         }
         span {
           color: $grey;
           font-weight: 500;
+          @media screen and (max-width: 544px) {
+           display: none;
+          }
         }
       }
       &.active {
@@ -96,11 +108,20 @@ nav {
         *{
           color: $primary-color;
         }
+        @media screen and (max-width: 544px) {
+          box-shadow: none;
+        }
       }
       &:hover {
         background-color: white;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
       }
+    }
+    @media screen and (max-width: 544px) {
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+      margin: 0;
     }
   }
   #profile {
@@ -114,6 +135,21 @@ nav {
     background-color: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
     border-radius: .8rem;
+    @media screen and (max-width: 544px) {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 544px) {
+    position: sticky;
+    bottom: 0;
+    flex-direction: row;
+    z-index: 99;
+    background-color: white;
+    height: fit-content;
+    width: 100%;
+    padding: 1rem 4rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    border-radius: 1.5rem 1.5rem 0 0;
   }
 }
 main {
@@ -145,6 +181,18 @@ main {
       display: flex;
       gap: 1rem;
       width: 100%;
+      flex-direction: row;
+    }
+    .inputs-container {
+      display: flex;
+      gap: 1rem;
+      width: 100%;
+    }
+    @media screen and (max-width: 800px) {
+      flex-direction: column-reverse;
+      form {
+        flex-wrap: wrap;
+      }
     }
   }
   padding: 5rem 1rem 1rem 1rem;
@@ -155,6 +203,9 @@ main {
     padding: .5rem;
     border-radius: .6rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  @media screen and (max-width: 544px) {
+    padding-top: 3rem;
   }
 }
 .card {
@@ -184,6 +235,18 @@ main {
   row-gap: 1rem;
   .card-container {
     padding: 0 .5rem;
+    @media screen and (max-width: 1200px) {
+      width: 50%;
+    }
+    @media screen and (min-width: 1200px) {
+      width: 30%;
+    }
+    @media screen and (min-width: 1400px) {
+      width: 25%;
+    }
+    @media screen and (max-width: 800px) {
+      width: 100%;
+    }
   }
   .card-title {
     display: -webkit-box;
@@ -309,4 +372,28 @@ main {
   color: $primary-color;
   font-size: 1.5rem;
   font-weight: 700;
+}
+#modal .modal-content {
+  .modal-img {
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      max-height: 300px;
+    }
+    img {
+      @media screen and (max-width: 600px) {
+        transform: translateY(-25%);
+      }
+    }
+  }
+  .modal-body {
+    @media screen and (max-width: 600px) {
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+}
+#modal .modal-dialog {
+  width: 90%;
 }

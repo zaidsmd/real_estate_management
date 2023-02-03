@@ -43,20 +43,22 @@ include "dbconfig.php"
                     <option value="For Sale">For Sale</option>
                     <option value="For Rent">For Rent</option>
                 </select>
-                <div class="range">
-                    <label for="range_min">Min:</label>
-                    <input type="number" name="min" id="range_min" value="0">
-                </div>
-                <div class="range">
-                    <label for="range_max">Max:</label>
-                    <input type="number" name="max" id="range_max" value="3000000000">
+                <div class="inputs-container" >
+                    <div class="range">
+                        <label for="range_min">Min:</label>
+                        <input type="number" name="min" id="range_min" value="0">
+                    </div>
+                    <div class="range">
+                        <label for="range_max">Max:</label>
+                        <input type="number" name="max" id="range_max" value="3000000000">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="search"><i class="fa-solid fa-magnifying-glass"></i>
                 </div>
                 <input type="text" name="check" value="true" style="display: none">
-                <button type="submit" class="btn btn-primary" id="search"><i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </form>
         </div>
-        <div class="cards d-flex flex-wrap">
+        <div class="cards d-flex flex-wrap justify-content-lg-around justify-content-md-around">
             <?php
             if (isset($_GET["check"])) {
                 $max = $_GET["max"];
@@ -88,26 +90,15 @@ include "dbconfig.php"
                              alt="">
                     </div>
                     <div class="modal-body">
-                        <h4 class="title">647m² house with garage</h4>
+                        <h4 class="title"></h4>
                         <div class="tags">
-                            <div class="tag">For Sale</div>
-                            <div class="tag">647m²</div>
-                            <div class="tag">2023-02-31</div>
+                            <div class="tag"></div>
+                            <div class="tag"></div>
+                            <div class="tag"></div>
                         </div>
-                        <div class="adresse">2441 S Fraser Street, Aurora</div>
-                        <p class="modal-desc">
-                            Located on a sunny, east-facing lot in Aurora’s Chaddsford neighborhood, this contemporary
-                            home
-                            balances modern updates and timeless charm. Tons of natural light, a fresh neutral palette
-                            and
-                            beautiful hardwood floors seamlessly connect the main living spaces. The gas fireplace acts
-                            as
-                            the focal point to the inviting living room and the formal dining room is ideal for
-                            entertaining. The updated galley kitchen includes butcherblock counters, new cabinetry and
-                            easy
-                            access to the backyard through the large sliding glass door.
-                        </p>
-                        <p class="price">$475,000.00</p>
+                        <div class="adresse"></div>
+                        <p class="modal-desc"></p>
+                        <p class="price"></p>
                         <div class="buttons">
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#del-modal"  type="button" id="delete">Delete</button>
                             <button class="btn btn-primary" id="edit" data-bs-toggle="modal" data-bs-target="#modify-modal">Edit</button>
@@ -292,7 +283,7 @@ function createCard($data)
 {
     foreach ($data as $row) {
         echo '
-            <div class="card-container col-3">
+            <div class="card-container ">
            <div class="card" data-id="' . $row["annonce_id"] . '"onclick=\'show(' . json_encode($row) . ')\' data-bs-toggle="modal" data-bs-target="#modal">
                <img src="pictures/' . $row["annonce_image"] . '" class="card-img-top" alt="' . $row["annonce_title"] . '">
                <div class="card-body">

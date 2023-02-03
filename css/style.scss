@@ -189,12 +189,13 @@ main {
     overflow: hidden;
   }
 }
-#modal ,#del-modal, #add-modal{
+#modal ,#del-modal, #add-modal, #modify-modal{
   .modal-img {
     width: 50%;
     overflow: clip;
     img  {
-      max-height: 600px;
+      max-height: 700px;
+      height: 100%;
       transform: translateX(-25%);
     }
   }
@@ -246,7 +247,7 @@ main {
       background-color: #df6c6c;
     }
   }
-  /////add-modal
+  /////add-modify-modals
   form {
     display: flex;
     flex-direction: column;
@@ -255,6 +256,7 @@ main {
   input ,select{
     border: 1px solid $primary-color;
     height: 100%;
+    box-shadow: none;
   }
   label:after {
     content: '*';

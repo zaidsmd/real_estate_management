@@ -40,7 +40,7 @@ include "php/head.php"; // include html head and navbar
                 // here I had to check all inputs to get the right data;
                 if ($_GET["type"] != 0) {
                     if ($max != '') {
-                        if ($min = ''){
+                        if ($min == ''){
                             $min = 0;
                         }
                         $statement = $conn->prepare("SELECT * FROM `annonces` WHERE annonce_type = '$type' AND annonce_price BETWEEN '$min' AND '$max' ORDER BY annonce_date DESC");
@@ -55,7 +55,7 @@ include "php/head.php"; // include html head and navbar
                     }
                 } else {
                     if ($max != '') {
-                        if ($min = ''){
+                        if ($min == ''){
                             $min = 0;
                         }
                         $statement = $conn->prepare("SELECT * FROM `annonces` WHERE annonce_price BETWEEN '$min' AND '$max' ORDER BY annonce_date DESC");
@@ -98,7 +98,7 @@ function createCard($data)
             //you can notice that there is onclick function that takes the all data of the card and pass it to the js to be used onclick to affiche all data
             echo '
             <div class="card-container ">
-           <div class="card" data-id="' . $row["annonce_id"] . '"onclick=\'show(' . json_encode($row) . ')\' data-bs-toggle="modal" data-bs-target="#modal">
+           <div class="card" data-id="' . $row["annonce_id"] . '"onclick=\'show(' . json_encode($row). ')\' data-bs-toggle="modal" data-bs-target="#modal">
                <img src="pictures/' . $row["annonce_image"] . '" class="card-img-top" alt="' . $row["annonce_title"] . '">
                <div class="card-body">
                    <h4 class="card-title">' . $row["annonce_title"] . '</h4>

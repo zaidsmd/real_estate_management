@@ -238,7 +238,7 @@ form .input::after {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 .card img {
-  height: 260px !important;
+  max-height: 200px !important;
 }
 .card * {
   margin: 0;

@@ -208,6 +208,18 @@ main {
     padding-top: 3rem;
   }
 }
+form {
+  .input{
+    &::after {
+      content: attr(data-after);
+      display: block;
+      color: #E74040;
+      font-size: .9rem;
+      margin-left: .5rem;
+      text-transform: capitalize;
+    }
+  }
+}
 .card {
   border: none;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -322,6 +334,7 @@ main {
   input ,select{
     border: 1px solid $primary-color;
     height: 100%;
+    max-height: 48px;
     box-shadow: none;
   }
   label:after {
@@ -381,7 +394,8 @@ main {
     }
     img {
       @media screen and (max-width: 600px) {
-        transform: translateY(-25%);
+        transform: none;
+        width: 120%;
       }
     }
   }
@@ -393,9 +407,6 @@ main {
   @media screen and (max-width: 600px) {
     flex-direction: column;
   }
-}
-#modal .modal-dialog {
-  width: 90%;
 }
 .notFound {
   text-align: center;

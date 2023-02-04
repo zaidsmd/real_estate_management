@@ -1,13 +1,14 @@
 <?php
-include "php/dbconfig.php";
-include "php/head.php";
+//I will leave a comment in every important part of code so u can just skip the long html parts without being afraid of not understanding the code
+include "php/dbconfig.php"; //connect to database;
+include "php/head.php"; // include html head and navbar
 ?>
     <main>
         <h2 class="title">Listings</h2>
         <div class="inputs">
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-modal" id="add"><span>Add</span><i
                         class="fa-solid fa-plus"></i></button>
-            <form action="index.php" method="get">
+            <form id="search-form" action="index.php" method="get">
                 <label for="type" style="display: none">type</label>
                 <select name="type" id="type">
                     <option value="0">Filter by type</option>
@@ -31,49 +32,70 @@ include "php/head.php";
         </div>
         <div class="cards d-flex flex-wrap justify-content-lg-around justify-content-md-around">
             <?php
+            // it is necessary to check is it search or first load to know what data to get from DB;
             if (isset($_GET["check"])) {
-                $max = ( $_GET["max"]);
-                $min = ( $_GET["min"]);
+                $max = ($_GET["max"]);
+                $min = ($_GET["min"]);
                 $type = $_GET["type"];
-                if (isset($_GET["max"]) && isset($_GET["min"]) && $_GET["type"] != 0) {
-                    $statement = $conn->prepare("SELECT * FROM `annonces` WHERE annonce_type = '$type' AND annonce_price BETWEEN $min AND $max");
+                // here I had to check all inputs to get the right data;
+                if ($_GET["type"] != 0) {
+                    if ($max != '') {
+                        if ($min = ''){
+                            $min = 0;
+                        }
+                        $statement = $conn->prepare("SELECT * FROM `annonces` WHERE annonce_type = '$type' AND annonce_price BETWEEN '$min' AND '$max' ORDER BY annonce_date DESC");
+                        $statement->execute();
+                        $result = $statement->fetchAll();
+                        createCard($result);
+                    }else {
+                        $statement = $conn->prepare("SELECT * FROM `annonces` WHERE annonce_type = '$type' ORDER BY annonce_date DESC");
+                        $statement->execute();
+                        $result = $statement->fetchAll();
+                        createCard($result);
+                    }
                 } else {
-                    $statement = $conn->prepare("SELECT * FROM `annonces` WHERE annonce_price BETWEEN $min AND $max");
+                    if ($max != '') {
+                        if ($min = ''){
+                            $min = 0;
+                        }
+                        $statement = $conn->prepare("SELECT * FROM `annonces` WHERE annonce_price BETWEEN '$min' AND '$max' ORDER BY annonce_date DESC");
+                        $statement->execute();
+                        $result = $statement->fetchAll();
+                        createCard($result);
+                    }else {
+                        $statement = $conn->prepare("SELECT * FROM `annonces` ORDER BY `annonce_date` DESC");
+                        $statement->execute();
+                        $result = $statement->fetchAll();
+                        createCard($result);
+                    }
+
                 }
-                $statement->execute();
-                $result = $statement->fetchAll();
-                createCard($result);
             } else {
-                $statement = $conn->prepare("SELECT * FROM `annonces`");
+                //here is normal page load without any actions getting the data and use the create function to create the cards
+                $statement = $conn->prepare("SELECT * FROM `annonces` ORDER BY `annonce_date` DESC");
                 $statement->execute();
                 $result = $statement->fetchAll();
                 createCard($result);
             }
             ?>
         </div>
-        <?php include "php/modals.php"?>
+        <?php include "php/modals.php" ?>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-            crossorigin="anonymous"></script>
-    <script src="script/script.js"></script>
-    <script>
-        <?php
-        if (isset($_GET["check"])) {
-            echo "
-            document.querySelector('#range_min').value = " . $_GET["min"] . ";
-            document.querySelector('#range_max').value = " . $_GET["max"] . ";
-            document.querySelector('option[value=\"" . $_GET["type"] . "\"]').setAttribute('selected','');
-            ";
-        }
-        ?>
-    </script>
+<?php
+include "php/scripts.php" // including all javascript scripts
+?>
     </body>
     </html>
 <?php
-function createCard($data){
-    if ($data != null){
+//######### Functions ###########
+//just one function that take the data fetched from DB and loop on it creating html cards with data
+function createCard($data)
+{
+    // I had to check if there is data bcs we have search data too,
+    // if there is no matching data requested the user should know, so he doesn't think that the website is broken;
+    if ($data != null) {
         foreach ($data as $row) {
+            //you can notice that there is onclick function that takes the all data of the card and pass it to the js to be used onclick to affiche all data
             echo '
             <div class="card-container ">
            <div class="card" data-id="' . $row["annonce_id"] . '"onclick=\'show(' . json_encode($row) . ')\' data-bs-toggle="modal" data-bs-target="#modal">
@@ -91,7 +113,7 @@ function createCard($data){
            </div>
        </div>';
         }
-    }else {
+    } else {
         echo "<div class='notFound d-flex flex-column gap-2'>
                 <i class='fa-solid fa-house-circle-xmark'></i>
                 <h2>Sorry there is no matching annonces at the moment</h2>

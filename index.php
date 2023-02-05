@@ -98,8 +98,10 @@ function createCard($data)
             //you can notice that there is onclick function that takes the all data of the card and pass it to the js to be used onclick to affiche all data
             echo '
             <div class="card-container ">
-           <div class="card" data-id="' . $row["annonce_id"] . '"onclick=\'show(' . json_encode($row). ')\' data-bs-toggle="modal" data-bs-target="#modal">
+           <div class="card" data-id="' . $row["annonce_id"] . '"onclick=\'show(' . json_encode($row) . ')\' data-bs-toggle="modal" data-bs-target="#modal">
+              <div class="card-img">
                <img src="pictures/' . $row["annonce_image"] . '" class="card-img-top" alt="' . $row["annonce_title"] . '">
+</div>
                <div class="card-body">
                    <h4 class="card-title">' . $row["annonce_title"] . '</h4>
                    <div class="tags">

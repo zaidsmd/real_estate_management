@@ -2,7 +2,7 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
 <script src="script/script.js"></script>
-<script>
+<script defer >
     <?php
         //here I wanted to get the inputs loaded with the last data that user entered to search, so he can review the search result with the request that he made
     if (isset($_GET["check"])) {
@@ -13,4 +13,10 @@
             ";
     }
     ?>
+
+        setTimeout(function (){
+            document.querySelector('img[alt="www.000webhost.com"]').remove();
+        },2000)
+
+
 </script>

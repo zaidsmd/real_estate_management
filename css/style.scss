@@ -91,7 +91,7 @@ nav {
         img  {
           transform: scale(.8);
           @media screen and (max-width: 544px) {
-            transform: scale(1);
+            transform: scale(.9);
           }
         }
         span {
@@ -147,7 +147,7 @@ nav {
     background-color: white;
     height: fit-content;
     width: 100%;
-    padding: 1rem 4rem;
+    padding: .7rem 4rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     border-radius: 1.5rem 1.5rem 0 0;
   }
@@ -229,8 +229,15 @@ form {
   &:hover {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   }
-  img {
+  .card-img {
     max-height: 200px !important;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    img {
+      width: 100%
+    }
   }
   *{
     margin: 0;
@@ -345,6 +352,13 @@ form {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    @media screen and (max-width:616px )  {
+      flex-direction: column;
+      .input {
+        width: 100%;
+      }
+      gap: 1rem;
+    }
   }
   .input {
     display: flex;

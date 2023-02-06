@@ -118,7 +118,7 @@ function createCard($data)
     } else {
         echo "<div class='notFound d-flex flex-column gap-2'>
                 <i class='fa-solid fa-house-circle-xmark'></i>
-                <h2>Sorry there is no matching annonces at the moment</h2>
+                <h2>Sorry there is no matching article at the moment</h2>
                </div>";
     }
 }

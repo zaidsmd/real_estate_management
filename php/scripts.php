@@ -13,10 +13,4 @@
             ";
     }
     ?>
-
-        setTimeout(function (){
-            document.querySelector('img[alt="www.000webhost.com"]').remove();
-        },2000)
-
-
 </script>

@@ -8,9 +8,13 @@
     if (isset($_GET["check"])) {
         echo "
             document.querySelector('#range_min').value = " . $_GET["min"] . ";
-            document.querySelector('#range_max').value = " . $_GET["max"] . ";
+            ";
+        if ($_GET["max"]!=''){
+            echo " document.querySelector('#range_max').value = " . $_GET["max"] . ";
             document.querySelector('option[value=\"" . $_GET["type"] . "\"]').setAttribute('selected','');
             ";
+        }
+
     }
     ?>
 </script>

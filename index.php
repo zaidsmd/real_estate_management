@@ -22,7 +22,7 @@ include "php/head.php"; // include html head and navbar
                     </div>
                     <div class="range">
                         <label for="range_max">Max:</label>
-                        <input type="number" name="max" id="range_max" value="3000000000">
+                        <input type="number" name="max" id="range_max" value="">
                     </div>
                     <button type="submit" class="btn btn-primary" id="search"><i
                                 class="fa-solid fa-magnifying-glass"></i>
@@ -43,12 +43,16 @@ include "php/head.php"; // include html head and navbar
                         if ($min == ''){
                             $min = 0;
                         }
+                        echo $type;
                         $statement = $conn->prepare("SELECT * FROM `annonces` WHERE annonce_type = '$type' AND annonce_price BETWEEN '$min' AND '$max' ORDER BY annonce_date DESC");
                         $statement->execute();
                         $result = $statement->fetchAll();
                         createCard($result);
                     }else {
-                        $statement = $conn->prepare("SELECT * FROM `annonces` WHERE annonce_type = '$type' ORDER BY annonce_date DESC");
+                        if ($min == ''){
+                            $min = 0;
+                        }
+                        $statement = $conn->prepare("SELECT * FROM `annonces` WHERE annonce_type = '$type' AND annonce_price > '$min' ORDER BY annonce_date DESC");
                         $statement->execute();
                         $result = $statement->fetchAll();
                         createCard($result);
@@ -63,7 +67,10 @@ include "php/head.php"; // include html head and navbar
                         $result = $statement->fetchAll();
                         createCard($result);
                     }else {
-                        $statement = $conn->prepare("SELECT * FROM `annonces` ORDER BY `annonce_date` DESC");
+                        if ($min == ''){
+                            $min = 0;
+                        }
+                        $statement = $conn->prepare("SELECT * FROM `annonces` WHERE annonce_price > '$min' ORDER BY annonce_date DESC");
                         $statement->execute();
                         $result = $statement->fetchAll();
                         createCard($result);
